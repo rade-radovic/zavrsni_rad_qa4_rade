@@ -20,6 +20,8 @@ describe ('Login', () => {
             // console.log(interception)
             expect(interception.response.body.user.email).to.equal(correctEmail)
         })
+        cy.get(Locators.Header.Logout).click()
+        cy.get(Locators.Header.Login).should('be.visible')
     })
  
 })

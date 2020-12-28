@@ -23,3 +23,38 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+const Locators = require('../fixtures/Locators.json')
+
+Cypress.Commands.add('loginCommandBackend', (userName, password) => {
+    cy.request({
+        method : 'POST',
+        url : 'https://gradebook-api.vivifyideas.com/api/login',
+        body : {
+            email:"cypress@test.com",
+            password:"test1234"
+        }
+    }).its('body').then((responseBody) => {
+        window.localStorage.setItem('loginToken', responseBody.token);
+        
+    })
+})
+
+Cypress.Commands.add('loginCommandFrontend', (userName, password) => {
+         cy.get(Locators.Header.Login).click()
+         cy.get(Locators.Login.Email).type(userName)
+         cy.get(Locators.Login.Password).type(password)
+         cy.get(Locators.Login.Submit).click()
+})
+
+Cypress.Commands.add('addNewProfessor', (firstName, lastName, imageUrl) => {
+    
+    cy.get(Locators.Header.Professors).should('be.visible').click()
+    cy.get(Locators.Header.CreateProfessor).click()
+    cy.get(Locators.CreateProfessor.FirstName).type(firstName)
+    cy.get(Locators.CreateProfessor.LastName).type(lastName)
+    cy.get(Locators.CreateProfessor.AddImages).click()
+    cy.get(Locators.CreateProfessor.OneImageUrl).type(imageUrl)
+    cy.get(Locators.CreateProfessor.Submit).click()
+})
+
+

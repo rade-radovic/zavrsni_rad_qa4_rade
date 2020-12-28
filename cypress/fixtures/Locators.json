@@ -39,6 +39,12 @@
         "LastName" : "#lastName",
         "AddImages" : "button[class='btn btn-sm btn-primary']",
         "OneImageUrl" : "input[name='image_NaN']",
-        "Submit" : "button[type='submit']"
+        "Submit" : "button[type='submit']",
+        "ImgButton" : "button[class='btn btn-sm']"
+    },
+
+    "AllGradebooks" : {
+        "FilterField" : "input[class='form-control']",
+        "Search" : "button[class='btn btn-md btn-primary mt-3']"
     }
 }
