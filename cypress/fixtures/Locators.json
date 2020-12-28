@@ -1,0 +1,44 @@
+{
+    "Header" :{
+        "Register" : "a[href='/register']",
+        "Login" : "a[href='/login']",
+        "Logout" : "a[href='#']",
+        "AllGradebooks" : "a[href='/gradebooks']",
+        "CreateGradebook" : "a[href='/create-gradebook']",
+        "Professors" : "a[href='/gradebooks#']",
+        "AllProfessors" : "a[href='/all-professors']",
+        "CreateProfessor" : "a[href='/create-professor']"
+
+
+    },
+
+    "Register" : {
+        "FirstName" : "#firstName",
+        "LastName" : "#lastName",
+        "Password" : "#password",
+        "PasswordConfirmation" : "#passwordConfirmation",
+        "Email" : "#email",
+        "Terms" : "#termsAndConditions",
+        "Submit" : "button[type='submit']"
+    },
+
+    "Login" : {
+        "Email" : "input[name='email']",
+        "Password" : "input[name='password']",
+        "Submit" : "button[type='submit']"
+    },
+
+    "CreateGradebook" : {
+        "Title" : "#title",
+        "Professor" : "#professor",
+        "Submit" : ".btn"
+    },
+
+    "CreateProfessor" : {
+        "FirstName" : "#firstName",
+        "LastName" : "#lastName",
+        "AddImages" : "button[class='btn btn-sm btn-primary']",
+        "OneImageUrl" : "input[name='image_NaN']",
+        "Submit" : "button[type='submit']"
+    }
+}
