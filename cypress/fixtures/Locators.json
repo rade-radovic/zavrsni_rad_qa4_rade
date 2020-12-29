@@ -4,6 +4,7 @@
         "Login" : "a[href='/login']",
         "Logout" : "a[href='#']",
         "AllGradebooks" : "a[href='/gradebooks']",
+        "MyGradebook" : "a[href='/my-gradebook/1262']",
         "CreateGradebook" : "a[href='/create-gradebook']",
         "Professors" : "a[href='/gradebooks#']",
         "AllProfessors" : "a[href='/all-professors']",
@@ -46,5 +47,18 @@
     "AllGradebooks" : {
         "FilterField" : "input[class='form-control']",
         "Search" : "button[class='btn btn-md btn-primary mt-3']"
+    },
+
+    "MyGradebook" : {
+        "DeleteGradebook" : "button[class='btn btn-md btn-danger']",
+        "AddStudentSubmitComment" : "button[class='btn btn-md btn-primary']",
+        "CommentField" : "textarea[placeholder='Writte your comment']"
+    },
+
+    "AddStudent" : {
+        "FirstName" : "#firstName",
+        "LastName" : "#lastName",
+        "AddImage" : "button[class='btn btn-md btn-primary mt-3 mb-3']",
+        "Submit" : "button[class='btn btn-md btn-primary mt-3']"
     }
 }
