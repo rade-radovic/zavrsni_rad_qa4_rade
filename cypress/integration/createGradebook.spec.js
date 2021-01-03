@@ -39,7 +39,7 @@ describe('Create Gradebook', () => {
         cy.get(Locators.CreateGradebook.Submit).click()
         cy.wait('@succesfulCreateGradebook').then((interception) => {
             expect(interception.response.body.title).to.equal(gradebookData.randomTitle)
-            gradebookId = interception.response.body.id;
+            gradebookId = interception.response.body.id;   //izvlacimo ID napravljenog gradebook-a
         })
     })
 
@@ -49,6 +49,7 @@ describe('Create Gradebook', () => {
         }).as('getFirstPage')
         cy.get(Locators.Header.CreateGradebook).click()
         cy.get(Locators.Header.AllGradebooks).click()
+        //pretrazujemo da li se nas gradebook nalazi na prvoj stranici tako sto ga trazimo putem njegovog ID-ja
         cy.wait('@getFirstPage').then((interception) => {
             var gradebookExist = false;
             for(var i = 0; i < interception.response.body.data.length; i++){
@@ -60,9 +61,7 @@ describe('Create Gradebook', () => {
         })
     })
 
-    
-
-    it('Filter for new gradebook', () => {
+    it('Filter for new gradebook and asert we have the right garebook', () => {
         cy.intercept('GET', `https://gradebook-api.vivifyideas.com/api/diaries/${gradebookId}`, (req) => {
 
         }).as('successfulGetGradebook')

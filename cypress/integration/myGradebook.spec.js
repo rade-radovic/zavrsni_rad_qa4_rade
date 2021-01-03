@@ -11,7 +11,9 @@ let studentData = {
     randomImage: faker.image.avatar(),
 }
 let gradebookId = "";
+let commentId = 0;
 let correctEmail = 'cypress@test.com';
+let commentBody = faker.lorem.sentence()
 
 describe('My gradebook', () => {
 
@@ -70,6 +72,19 @@ describe('My gradebook', () => {
         })      
     })
 
+    it('Add comment', () => {
+        cy.intercept('POST', `https://gradebook-api.vivifyideas.com/api/diaries/${gradebookId}/comments`, (req) => {
+        }).as('successfulPostComment')
+       
+        cy.get(Locators.Header.MyGradebook).should('be.visible').click()
+        cy.get(Locators.MyGradebook.CommentField).type(commentBody)
+        cy.get(Locators.MyGradebook.AddStudentSubmitComment).eq(1).click()
+        
+        cy.wait('@successfulPostComment').then((interception) => {
+            expect(interception.response.body.text).to.equal(commentBody)
+            commentId = interception.response.body.id;   //izvlacimo ID dodatog komentara
+        })     
+    })
 
     it('Delete Gradebook', () => {
         cy.intercept('DELETE', `https://gradebook-api.vivifyideas.com/api/diaries/${gradebookId}`, (req) => {

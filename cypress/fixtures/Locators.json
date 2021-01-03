@@ -52,7 +52,8 @@
     "MyGradebook" : {
         "DeleteGradebook" : "button[class='btn btn-md btn-danger']",
         "AddStudentSubmitComment" : "button[class='btn btn-md btn-primary']",
-        "CommentField" : "textarea[placeholder='Writte your comment']"
+        "CommentField" : "textarea[placeholder='Writte your comment']",
+        "DeleteComment" : "btn btn-md btn-danger mt-3 mb-3"
     },
 
     "AddStudent" : {

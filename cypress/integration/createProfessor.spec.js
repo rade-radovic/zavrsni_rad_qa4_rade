@@ -34,11 +34,10 @@ describe('Create Professor', () => {
         cy.get(Locators.CreateProfessor.OneImageUrl).type(professorData.randomImage)
         cy.get(Locators.CreateProfessor.Submit).click()
         cy.wait('@successfulCreateProfessor').then((interception) => {
-            expect(interception.response.body.message).to.equal("Images Saved!!")
-            expect(interception.response.body.success).to.be.true
+            expect(interception.response.statusCode).to.equal(200)
         })
     })
-
+    //Ocekujem da ce kreirani profesor biti poslednji na listi profesora pa ga tamo trazimo
     it('Check for new professor on All professors page', () => {
         cy.intercept('GET', 'https://gradebook-api.vivifyideas.com/api/professors', (req) => {
     
@@ -51,7 +50,7 @@ describe('Create Professor', () => {
         })
     })
 
-    it.only('Create new professor with three photos', () => {
+    it('Create new professor with three photos', () => {
         cy.intercept('POST', 'https://gradebook-api.vivifyideas.com/api/professors', (req) => {
     
         }).as('successfulCreateProfessor')
@@ -62,29 +61,28 @@ describe('Create Professor', () => {
         cy.get(Locators.CreateProfessor.AddImages).click()
         cy.get(Locators.CreateProfessor.AddImages).click()
         cy.get(Locators.CreateProfessor.AddImages).click()
-        cy.get(Locators.CreateProfessor.OneImageUrl).eq(0).type(professorData.randomImage)
+        cy.get(Locators.CreateProfessor.OneImageUrl).eq(0).type(professorData.randomImage)   
         cy.get(Locators.CreateProfessor.OneImageUrl).eq(1).type(professorData.randomImage2)
-        cy.get(Locators.CreateProfessor.OneImageUrl).eq(2).type(professorData.randomImage3)
-        cy.get(Locators.CreateProfessor.ImgButton).eq(4).click()
-        cy.get(Locators.CreateProfessor.ImgButton).eq(5).click()
-        cy.get(Locators.CreateProfessor.ImgButton).eq(6).click()
+        cy.get(Locators.CreateProfessor.OneImageUrl).eq(2).type(professorData.randomImage3)    //dodajemo 3 slike
+        cy.get(Locators.CreateProfessor.ImgButton).eq(4).click()                              //klik na dugme 'move up'
+        cy.get(Locators.CreateProfessor.ImgButton).eq(5).click()                               //klik na dugme 'move down'
+        cy.get(Locators.CreateProfessor.ImgButton).eq(6).click()                               //Klik na dugme 'remove image' (ostaje nam profesor sa dve slike)
         cy.get(Locators.CreateProfessor.Submit).click()
         cy.wait('@successfulCreateProfessor').then((interception) => {
-            expect(interception.response.body.message).to.equal("Images Saved!!")
-            expect(interception.response.body.success).to.be.true
+            expect(interception.response.statusCode).to.equal(200)
         })
     })
 
-    it.only('Check for new professor on All professors page and number of photos', () => {
+    it('Check for new professor on All professors page and number of photos', () => {
         cy.intercept('GET', 'https://gradebook-api.vivifyideas.com/api/professors', (req) => {
-    
+        //
         }).as('successfulGetAllProfessors')
         cy.get(Locators.Header.Professors).click()
         cy.get(Locators.Header.AllProfessors).click()
         cy.wait('@successfulGetAllProfessors').then((interception) => {
             expect(interception.response.body[interception.response.body.length -1].user.firstName).to.equal(professorData.randomName2)
             expect(interception.response.body[interception.response.body.length -1].user.lastName).to.equal(professorData.randomLastName2)
-            expect(interception.response.body[interception.response.body.length -1].professor_has_many_images.length).to.equal(2)
+            expect(interception.response.body[interception.response.body.length -1].professor_has_many_images.length).to.equal(2)               
 
         })
     })

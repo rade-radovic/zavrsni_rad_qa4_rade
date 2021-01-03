@@ -51,7 +51,6 @@ describe('Register', () => {
         cy.get(Locators.Register.PasswordConfirmation).type(userData.randomPassword)
         cy.get(Locators.Register.Terms).check()
         cy.get(Locators.Register.Submit).click()
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible')
     })
 
@@ -63,11 +62,10 @@ describe('Register', () => {
         cy.get(Locators.Register.PasswordConfirmation).type(userData.randomPassword)
         cy.get(Locators.Register.Terms).check()
         cy.get(Locators.Register.Submit).click()
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible')    
     })
 
-    it.only('Attempt register with empty Last Name', () =>{
+    it('Attempt register with empty Last Name', () =>{
         cy.get(Locators.Header.Register).click()
         cy.get(Locators.Register.FirstName).type(userData.randomName)
         cy.get(Locators.Register.Email).type(userData.randomEmail3)
@@ -78,7 +76,6 @@ describe('Register', () => {
         cy.get('#lastName').then(($input) => {
             expect($input[0].validationMessage).to.eq('Please fill out this field.')
           })
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible') 
     })
 
@@ -90,7 +87,6 @@ describe('Register', () => {
         cy.get(Locators.Register.PasswordConfirmation).type(userData.randomPassword)
         cy.get(Locators.Register.Terms).check()
         cy.get(Locators.Register.Submit).click()
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible')
     })
     it('Attempt register with empty password', () =>{
@@ -101,7 +97,6 @@ describe('Register', () => {
         cy.get(Locators.Register.PasswordConfirmation).type(userData.randomPassword)
         cy.get(Locators.Register.Terms).check()
         cy.get(Locators.Register.Submit).click()
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible')
     
     })
@@ -114,7 +109,6 @@ describe('Register', () => {
         cy.get(Locators.Register.Password).type(userData.randomPassword)
         cy.get(Locators.Register.Terms).check()
         cy.get(Locators.Register.Submit).click()
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible')
     })
 
@@ -126,7 +120,6 @@ describe('Register', () => {
         cy.get(Locators.Register.Password).type(userData.randomPassword)
         cy.get(Locators.Register.PasswordConfirmation).type(userData.randomPassword)
         cy.get(Locators.Register.Submit).click()
-        cy.wait(500)
         cy.get(Locators.Header.Login).should('be.visible')
     })
     
