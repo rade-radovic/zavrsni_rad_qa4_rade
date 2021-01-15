@@ -46,14 +46,16 @@
 
     "AllGradebooks" : {
         "FilterField" : "input[class='form-control']",
-        "Search" : "button[class='btn btn-md btn-primary mt-3']"
+        "Search" : "button[class='btn btn-md btn-primary mt-3']",
+        "PageTitle" : ".h3",
+        "FilterLabel" : "label"
     },
 
     "MyGradebook" : {
         "DeleteGradebook" : "button[class='btn btn-md btn-danger']",
         "AddStudentSubmitComment" : "button[class='btn btn-md btn-primary']",
         "CommentField" : "textarea[placeholder='Writte your comment']",
-        "DeleteComment" : "btn btn-md btn-danger mt-3 mb-3"
+        "DeleteComment" : "button[class='btn btn-md btn-danger mt-3 mb-3']"
     },
 
     "AddStudent" : {

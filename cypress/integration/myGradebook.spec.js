@@ -86,6 +86,38 @@ describe('My gradebook', () => {
         })     
     })
 
+    it('Check if comment is on My gradebook page', () => {
+        cy.intercept('GET', 'https://gradebook-api.vivifyideas.com/api/diaries/my-diary/1262', (req) => {
+        }).as('succesfulGetMyGradebook')
+        cy.get(Locators.Header.MyGradebook).should('be.visible').click()
+        cy.wait('@succesfulGetMyGradebook').then((interception) => {
+            expect(interception.response.body.comments[0].id).to.equal(commentId)
+            
+        })
+    })
+
+
+    it('Delete Comment', () => {
+        cy.intercept('DELETE', `https://gradebook-api.vivifyideas.com/api/comments/${commentId}`, (req) => {
+        }).as('succesfulDeleteComment')
+
+        cy.get(Locators.Header.MyGradebook).should('be.visible').click()
+        cy.get(Locators.MyGradebook.DeleteComment).should('be.visible').click()
+        cy.wait('@succesfulDeleteComment').then((interception) =>{
+            expect(interception.response.statusCode).to.equal(200)
+        })
+    })
+
+    it('Check if deleted comment not on My gradebook page', () => {
+        cy.intercept('GET', 'https://gradebook-api.vivifyideas.com/api/diaries/my-diary/1262', (req) => {
+        }).as('succesfulGetMyGradebook')
+        cy.get(Locators.Header.MyGradebook).should('be.visible').click()
+        cy.wait('@succesfulGetMyGradebook').then((interception) => {
+            expect(interception.response.body.comments.length).to.equal(0)
+            
+        })
+    })
+
     it('Delete Gradebook', () => {
         cy.intercept('DELETE', `https://gradebook-api.vivifyideas.com/api/diaries/${gradebookId}`, (req) => {
 
